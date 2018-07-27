@@ -76,10 +76,15 @@
                             "\n",
                             [
                                 "#!/bin/bash",
-                                "yum install --enablerepo=epel -y git",
-                                "pip install ansible",
-                                "/usr/local/bin/ansible-pull -U https://github.com/dportok/EffectiveDevOps.git.yaml -i localhost",
-                                "echo '*/10 * * * * /usr/local/bin/ansible-pull -U https://github.com/dportok/EffectiveDevOps.git.yaml -i localhost' > /etc/cron.d/ansible-pull"
+                                "sudo yum install --enablerepo=epel -y git",
+                                "sudo yum -y install python34",
+                                "sudo wget https://bootstrap.pypa.io/get-pip.py -O /home/ec2-user/get-pip.py",
+                                "sudo python3 /home/ec2-user/get-pip.py --user",
+                                "sudo pip install --upgrade pip",
+                                "sudo /usr/local/bin/pip install --upgrade setuptools",
+                                "sudo /usr/local/bin/pip install ansible",
+                                "/usr/local/bin/ansible-pull -U https://github.com/dportok/EffectiveDevOps.git helloworld.yaml -i localhost",
+                                "sudo echo '*/10 * * * * root /usr/local/bin/ansible-pull -U https://github.com/dportok/EffectiveDevOps.git helloworld.yaml -i localhost' > /etc/cron.d/ansible-pull"
                             ]
                         ]
                     }

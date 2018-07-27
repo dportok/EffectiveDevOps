@@ -49,10 +49,15 @@ t.add_resource(ec2.SecurityGroup(
 
 ud = Base64(Join('\n', [
     "#!/bin/bash",
-    "yum install --enablerepo=epel -y git",
-    "pip install ansible",
+    "sudo yum install --enablerepo=epel -y git",
+    "sudo yum -y install python34",
+    "sudo wget https://bootstrap.pypa.io/get-pip.py -O /home/ec2-user/get-pip.py",
+    "sudo python3 /home/ec2-user/get-pip.py --user",
+    "sudo pip install --upgrade pip",
+    "sudo /usr/local/bin/pip install --upgrade setuptools",
+    "sudo /usr/local/bin/pip install ansible",
     AnsiblePullCmd,
-    "echo '*/10 * * * * {}' > /etc/cron.d/ansible-pull".format(AnsiblePullCmd)
+    "sudo echo '*/10 * * * * root {}' > /etc/cron.d/ansible-pull".format(AnsiblePullCmd)
 ]))
 
 t.add_resource(ec2.Instance(
