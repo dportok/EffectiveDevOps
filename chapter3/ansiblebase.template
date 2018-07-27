@@ -84,7 +84,7 @@
                                 "sudo /usr/local/bin/pip install --upgrade setuptools",
                                 "sudo /usr/local/bin/pip install ansible",
                                 "/usr/local/bin/ansible-pull -U https://github.com/dportok/EffectiveDevOps.git helloworld.yaml -i localhost",
-                                "sudo echo '*/10 * * * * root /usr/local/bin/ansible-pull -U https://github.com/dportok/EffectiveDevOps.git helloworld.yaml -i localhost' > /etc/cron.d/ansible-pull"
+                                "sudo echo '*/10 * * * * ec2-user /usr/local/bin/ansible-pull -U https://github.com/dportok/EffectiveDevOps.git helloworld.yaml -i localhost' > /etc/cron.d/ansible-pull"
                             ]
                         ]
                     }

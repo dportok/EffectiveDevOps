@@ -57,7 +57,7 @@ ud = Base64(Join('\n', [
     "sudo /usr/local/bin/pip install --upgrade setuptools",
     "sudo /usr/local/bin/pip install ansible",
     AnsiblePullCmd,
-    "sudo echo '*/10 * * * * root {}' > /etc/cron.d/ansible-pull".format(AnsiblePullCmd)
+    "sudo echo '*/10 * * * * ec2-user {}' > /etc/cron.d/ansible-pull".format(AnsiblePullCmd)
 ]))
 
 t.add_resource(ec2.Instance(
