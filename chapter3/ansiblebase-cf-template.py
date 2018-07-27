@@ -16,7 +16,7 @@ ApplicationPort = "3000"
 PublicCidrIp = str(ip_network(get_ip()))
 GithubAccount = "dportok"
 GithubAnsibleURL = "https://github.com/{}/EffectiveDevOps.git".format(GithubAccount)
-AnsiblePullCmd = "/usr/local/bin/ansible-pull -U {}.yaml -i localhost".format(GithubAnsibleURL,ApplicationName)
+AnsiblePullCmd = "/usr/local/bin/ansible-pull -U {} {}.yaml -i localhost".format(GithubAnsibleURL,ApplicationName)
 t = Template()
 
 t.add_description("Effective DevOps in AWS: HelloWorld web application")
