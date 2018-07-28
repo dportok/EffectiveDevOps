@@ -1,21 +1,48 @@
 ---
 # tasks file for jenkins
-- name: Import Jenkins GPG key 
-  rpm_key:  
-    state: present 
-    key: http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key 
+- name: Ensure dependencies are installed.
+  package:
+    name:
+      - curl
+      - libselinux-python
+      - initscripts
+    state: present
+  
+- name: Ensure Jenkins repo is installed.
+  get_url:
+    url: "{{ jenkins_repo_url }}"
+    dest: /etc/yum.repos.d/jenkins.repo
+  when: jenkins_repo_url != ''
 
-- name: Add Jenkins repository 
-  yum_repository: 
-    name: jenkins 
-    description: jenkins repository 
-    baseurl: http://pkg.jenkins.io/redhat 
-    enabled: no 
-    gpgcheck: yes 
+- name: Add Jenkins repo GPG key.
+  rpm_key:
+    state: present
+    key: "{{ jenkins_repo_key_url }}"
+
+- name: Remove openjdk 1.7
+  yum:
+    name: openjdk
+    state: absent
+
+- name: Define java_packages.
+  set_fact:
+    java_packages: "{{ __java_packages | list }}"
+  when: java_packages is not defined
+
+- name: Ensure Java is installed.
+  package: "name={{ item }} state=present"
+  with_items: "{{ java_packages }}"
+
+# - name: Set JAVA_HOME if configured.
+#   template:
+#     src: java_home.sh.j2
+#     dest: /etc/profile.d/java_home.sh
+#     mode: 0644
+#   when: java_home is defined and java_home != ''
 
 - name: Install Jenkins 
   yum: 
-    name: jenkins-2.45
+    name: jenkins
     enablerepo: jenkins 
     state: present 
 
