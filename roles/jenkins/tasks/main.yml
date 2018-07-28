@@ -21,7 +21,7 @@
 
 - name: Remove openjdk 1.7
   yum:
-    name: openjdk
+    name: java-1.7.0-openjdk
     state: absent
 
 - name: Define java_packages.
