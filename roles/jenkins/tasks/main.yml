@@ -24,7 +24,6 @@
     name: java-1.7.0-openjdk
     state: absent
 
-
 - name: Define java_packages.
   set_fact:
     java_packages: "{{ __java_packages | list }}"
@@ -34,13 +33,11 @@
   package: "name={{ item }} state=present"
   with_items: "{{ java_packages }}"
 
-
 - name: Install Jenkins 
   yum: 
     name: jenkins
     enablerepo: jenkins 
     state: present 
-
 
 - name: Start Jenkins 
   service: 
