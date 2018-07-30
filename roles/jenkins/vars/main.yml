@@ -3,4 +3,4 @@
 jenkins_repo_url: https://pkg.jenkins.io/redhat/jenkins.repo
 jenkins_repo_key_url: https://pkg.jenkins.io/redhat/jenkins.io.key
 java_packages:
-  - java-1.8.0-openjdk
+  - java-1.8.0
