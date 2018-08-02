@@ -27,7 +27,7 @@
     state: absent
 
 - name: setup nodejs
-  command: curl --silent --location https://rpm.nodesource.com/setup_10.x | sudo bash -
+  shell: curl --silent --location https://rpm.nodesource.com/setup_10.x | sudo bash -
 
 - name: install nodejs
   yum:
