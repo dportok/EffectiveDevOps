@@ -21,8 +21,18 @@
 
 - name: Remove openjdk 1.7
   yum:
-    name: java-1.7.0-openjdk
+    name: 
+      - java-1.7.0-openjdk
+      - nodejs
     state: absent
+
+- name: setup nodejs
+  command: curl --silent --location https://rpm.nodesource.com/setup_10.x | sudo bash -
+
+- name: install nodejs
+  yum:
+    name: nodejs
+    state: present
 
 - name: Define java_packages.
   set_fact:
