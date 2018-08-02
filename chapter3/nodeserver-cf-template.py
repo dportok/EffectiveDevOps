@@ -28,8 +28,8 @@ from awacs.aws import (
 
 from awacs.sts import AssumeRole
 
-ApplicationName = "jenkins"
-ApplicationPort = "8080"
+ApplicationName = "nodeserver"
+ApplicationPort = "3000"
 
 GithubAccount = "dportok"
 GithubAnsibleURL = "https://github.com/{}/EffectiveDevOps".format(GithubAccount)
@@ -100,19 +100,18 @@ t.add_resource(Role(
 
 t.add_resource(IAMPolicy(
     "Policy",
-    PolicyName="AllowCodePipeline",
+    PolicyName="AllowsS3",
     PolicyDocument=Policy(
         Statement=[
             Statement(
                 Effect=Allow,
-                Action=[Action("codepipeline", "*")],
+                Action=[Action("s3", "*")],
                 Resource=["*"]
             )
         ]
     ),
     Roles=[Ref("Role")]
 ))
-
 
 t.add_resource(InstanceProfile(
     "InstanceProfile",
